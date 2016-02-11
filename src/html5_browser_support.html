@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-Hant1-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Browser Support</title>
+
+    <!--以上代碼是一個註釋，作用是在IE 瀏覽器的版本小於IE9 時將讀取html5.js 文件，並解析它。-->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style>
+        /*將HTML5 元素定義為塊元素*/
+        /*HTML5定了8個新的HTML 語義（semantic）元素。所有這些元素都是塊級元素。*/
+        /*為了能讓舊版本的瀏覽器正確顯示這些元素，你可以設置CSS的display屬性值為block :*/
+        header, section, footer, aside, nav, main, article, figure {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
