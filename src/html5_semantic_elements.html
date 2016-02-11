@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant1-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Semantic Elements</title>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style>
+        header, section, footer, aside, nav, main, article, figure {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<!--<header>元素描述了文檔的頭部區域-->
+<!--<header>元素注意用於定義內容的介紹展示區域.-->
+<!--在頁面中你可以使用多個<header> 元素.-->
+<header>
+    <h1>What Does WWF Do?</h1>
+    <p>WWF's mission:</p>
+</header>
+
+<!--<nav> 標籤定義導航鏈接的部分。-->
+<!--<nav> 元素用於定義頁面的導航鏈接部分區域，但是，不是所有的鏈接都需要包含在<nav> 元素中!-->
+<nav>
+    <a href="/html/">HTML</a> |
+    <a href="/css/">CSS</a> |
+    <a href="/js/">JavaScript</a> |
+    <a href="/jquery/">jQuery</a>
+</nav>
+
+<!--<section> 標籤定義文檔中的節（section、區段）。比如章節、頁眉、頁腳或文檔中的其他部分。-->
+<!--根據W3C HTML5文檔: section 包含了一組內容及其標題。-->
+<section>
+    <h1>WWF</h1>
+    <p>The World Wide Fund for Nature (WWF) is....</p>
+</section>
+
+<!--<article> 標籤定義獨立的內容。-->
+<article>
+    <h1>What Does WWF Do?</h1>
+    <p>WWF's mission is to stop the degradation of our planet's natural environment,
+        and build a future in which humans live in harmony with nature.</p>
+
+    <!--<figure>標籤規定獨立的流內容（圖像、圖表、照片、代碼等等）。-->
+    <!--<figure> 元素的內容應該與主內容相關，但如果被刪除，則不應對文檔流產生影響。-->
+    <!--<figcaption> 標籤定義<figure> 元素的標題.-->
+    <!--<figcaption>元素應該被置於"figure" 元素的第一個或最後一個子元素的位置。-->
+    <figure>
+        <img src="pic_mountain.jpg" alt="The Pulpit Rock" width="304" height="228">
+        <figcaption>Fig1. - The Pulpit Rock, Norway.</figcaption>
+    </figure>
+</article>
+
+<!--<aside> 標籤定義頁面主區域內容之外的內容（比如側邊欄）。-->
+<aside>
+    <h4>Epcot Center</h4>
+    <p>The Epcot Center is a theme park in Disney World, Florida.</p>
+</aside>
+
+<!--<footer> 元素描述了文檔的底部區域.-->
+<!--<footer> 元素應該包含它的包含元素-->
+<!--一個頁腳通常包含文檔的作者，著作權信息，鏈接的使用條款，聯繫信息等-->
+<!--文檔中你可以使用多個<footer>元素.-->
+<footer>
+    <p>Posted by: Hege Refsnes</p>
+    <p>Contact information: <a href="mailto:someone@example.com">
+        someone@example.com</a>.</p>
+</footer>
+</body>
+</html>
