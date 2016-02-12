@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Canvas</title>
+    <script>
+        /**
+         * canvas 元素本身是沒有繪圖能力的。所有的繪製工作必須在 JavaScript 內部完成。
+         */
+        function drawing() {
+            var c = document.getElementById("myCanvas");
+
+            // getContext("2d") 對像是內建的 HTML5 對象，擁有多種繪製路徑、矩形、圓形、字符以及添加圖像的方法。
+            var ctx = c.getContext("2d");
+
+            // 設置 fillStyle 屬性可以是CSS顏色，漸變，或圖案。fillStyle 默認設置是#000000（黑色）。
+            ctx.fillStyle = "#FF0000";
+
+            // fillRect(x, y, width, height) - 方法定義了矩形當前的填充方式。
+            ctx.fillRect(0, 0, 150, 75);
+        }
+        /**
+         * 在 Canvas 上畫線。
+         */
+        function line() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // moveTo(x, y) - 定義線條開始坐標。
+            ctx.moveTo(0, 0);
+
+            // lineTo(x, y) - 定義線條結束坐標。
+            ctx.lineTo(200, 100);
+            ctx.stroke();
+        }
+
+        /**
+         * 在 canvas 中繪製圓形。
+         */
+        function circle() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            ctx.beginPath();
+            ctx.arc(95, 50, 40, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        /**
+         * 使用 canvas 繪製文本。
+         */
+        function text() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // font - 定義字體。
+            ctx.font = "30px Arial";
+
+            // fillText(text, x, y) - 在 canvas 上繪製實心的文本。
+            ctx.fillText("Hello World", 10, 50);
+
+            // strokeText(text, x, y) - 在 canvas 上繪製空心的文本。
+            ctx.strokeText("Hello World", 10, 80);
+        }
+
+        /**
+         * 創建線條漸變。
+         */
+        function linearGradient() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // createLinearGradient(x, y, x1, y1) - 創建線條漸變。
+            var grd = ctx.createLinearGradient(0, 0, 200, 0);
+
+            // addColorStop() - 方法指定顏色停止，參數使用坐標來描述，可以是0至1。
+            grd.addColorStop(0, "red");
+            grd.addColorStop(1, "white");
+
+            // 使用漸變，設置 fillStyle 或 strokeStyle 的值為漸變，然後繪製形狀，如矩形，文本，或一條線。
+            ctx.fillStyle = grd;
+            ctx.fillRect(10, 10, 150, 80);
+        }
+
+        /**
+         * 創建一個徑向/圓漸變。
+         */
+        function circularGradient() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // createRadialGradient(x, y, r, x1, y1, r1) - 創建一個徑向/圓漸變。
+            var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+
+            // addColorStop() - 方法指定顏色停止，參數使用坐標來描述，可以是0至1。
+            grd.addColorStop(0, "red");
+            grd.addColorStop(1, "white");
+
+            // 使用漸變，設置 fillStyle 或 strokeStyle 的值為漸變，然後繪製形狀，如矩形，文本，或一條線。
+            ctx.fillStyle = grd;
+            ctx.fillRect(10, 10, 150, 80);
+        }
+
+        /**
+         * 繪圖。
+         */
+        function image() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("scream");
+            ctx.drawImage(img, 10, 10);
+        }
+    </script>
+</head>
+<body>
+<!--一個畫佈在網頁中是一個矩形框，通過<canvas> 元素來繪製.-->
+<!--注意:默認情況下<canvas>元素沒有邊框和內容。-->
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<br/>
+<input type="button" onclick="drawing()" value="繪圖">
+<input type="button" onclick="line()" value="畫線">
+<input type="button" onclick="circle()" value="畫圓">
+<input type="button" onclick="text()" value="寫字">
+<input type="button" onclick="linearGradient()" value="畫線型漸層">
+<input type="button" onclick="circularGradient()" value="畫圓形漸層">
+<input type="button" onclick="image()" value="繪圖">
+<img id="scream" src="img/convas.png" alt="The Scream" width="128" height="128" style="display: none;">
+
+</body>
+</html>
