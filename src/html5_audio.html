@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Audio</title>
+</head>
+<body>
+<!--HTML5 <audio> 元素是一個HTML5 元素，在HTML 4 中是非法的，但在所有瀏覽器中都有效。-->
+<!--The <audio> element works in all modern browsers.-->
+<audio controls>
+    <source src="audio/horse.mp3" type="audio/mpeg">
+
+    <!--<object tag> 標籤也可以定義外部（非HTML）內容的容器。-->
+    <object data="audio/horse.mp3">
+        <!--<embed>標籤定義外部（非HTML）內容的容器。（這是一個HTML5 標籤，在HTML4 中是非法的，但是所有瀏覽器中都有效）。-->
+        <embed src="audio/horse.mp3"></embed>
+    </object>
+</audio>
+
+</body>
+</html>
