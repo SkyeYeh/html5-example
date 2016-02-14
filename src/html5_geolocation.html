@@ -18,14 +18,29 @@
     var x = document.getElementById("demo");
 
     /**
-     * 請使用getCurrentPosition() 方法來獲得用戶的位置。
-     * @param show 顯示定位方法
+     * 請使用 getCurrentPosition() 方法來獲得用戶的位置。
+     * @param success 顯示定位方法
      */
-    function getLocation(show) {
+    function getLocation(success) {
         // 檢測是否支持地理定位。
         if (navigator.geolocation) {
-            // 如果支持，則運行 show() 方法。如果 show() 運行成功，則向參數 show 中規定的函數返回一個 coordinates 對象。
-            navigator.geolocation.getCurrentPosition(show, showError);
+            // 如果支持，則運行 success() 方法。如果 success() 運行成功，則向參數 success 中規定的函數返回一個 coordinates 對象。
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            // 如果不支持，則向用戶顯示一段消息。
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    /**
+     * watchPosition() - 返回用戶的當前位置，並繼續返回用戶移動時的更新位置（就像汽車上的GPS）。
+     * clearWatch() - 停止watchPosition() 方法。
+     * @param success 顯示定位方法
+     */
+    function whatLocation(success) {
+        if (navigator.geolocation) {
+            // 如果支持，則運行 success() 方法。如果 success() 運行成功，則向參數 success 中規定的函數返回一個 coordinates 對象。
+            navigator.geolocation.watchPosition(success, error);
         } else {
             // 如果不支持，則向用戶顯示一段消息。
             x.innerHTML = "Geolocation is not supported by this browser.";
@@ -56,7 +71,7 @@
      * getCurrentPosition() 方法的第二個參數用於處理錯誤。它規定當獲取用戶位置失敗時運行的函數。
      * @param error 錯誤代碼
      */
-    function showError(error) {
+    function error(error) {
         switch (error.code) {
             // Permission denied - 用戶不允許地理定位。
             case error.PERMISSION_DENIED:
