@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Geolocation</title>
+</head>
+<body>
+
+<button onclick="getLocation(showCurrentPosition)">使用地理定位</button>
+
+<p id="demo"></p>
+
+<button onclick="getLocation(showCurrentPositionMaps)">在地圖中顯示結果</button>
+
+<div id="mapholder"></div>
+
+<script>
+    var x = document.getElementById("demo");
+
+    /**
+     * 請使用getCurrentPosition() 方法來獲得用戶的位置。
+     * @param show 顯示定位方法
+     */
+    function getLocation(show) {
+        // 檢測是否支持地理定位。
+        if (navigator.geolocation) {
+            // 如果支持，則運行 show() 方法。如果 show() 運行成功，則向參數 show 中規定的函數返回一個 coordinates 對象。
+            navigator.geolocation.getCurrentPosition(show, showError);
+        } else {
+            // 如果不支持，則向用戶顯示一段消息。
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    /**
+     * showCurrentPosition() 函數獲得並顯示經度和緯度。
+     * @param position coordinates 對象
+     */
+    function showCurrentPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+    }
+
+    /**
+     * 如需在地圖中顯示結果，您需要訪問可使用經緯度的地圖服務，比如 Google 地圖。
+     * @param position coordinates 對象
+     */
+    function showCurrentPositionMaps(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+        var img_url = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=400x300&sensor=false";
+        document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+    }
+
+    /**
+     * getCurrentPosition() 方法的第二個參數用於處理錯誤。它規定當獲取用戶位置失敗時運行的函數。
+     * @param error 錯誤代碼
+     */
+    function showError(error) {
+        switch (error.code) {
+            // Permission denied - 用戶不允許地理定位。
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "User denied the request for Geolocation.";
+                break;
+            // Position unavailable - 無法獲取當前位置。
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Location information is unavailable.";
+                break;
+            // Timeout - 操作超時。
+            case error.TIMEOUT:
+                x.innerHTML = "The request to get user location timed out.";
+                break;
+            default:
+                x.innerHTML = "An unknown error occurred.";
+                break;
+        }
+    }
+</script>
+
+</body>
+</html>
