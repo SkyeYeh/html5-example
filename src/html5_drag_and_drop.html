@@ -16,28 +16,26 @@
 <body>
 <p>Drag the W3Schools image into the rectangle:</p>
 
-<!--ondragover 事件規定在何處放置被拖動的數據。默認地，無法將數據/元素放置到其他元素中。當放置被拖數據時，會發生drop 事件。-->
-<div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+<div id="div1"></div>
 <br>
 
-<!--為了使元素可拖動，把 draggable 屬性設置為 true。ondragstart 屬性調用了一個函數。-->
-<img id="drag1" src="img/drag.png" width="64" height="64" draggable="true" ondragstart="drag(event)">
+<img id="drag1" src="img/drag.png" width="64" height="64" draggable="true">
 
 <script>
     /**
-     * drag(event)，它規定了被拖動的數據。
+     * doDragStart(event)，它規定了被拖動的數據。
      * @param ev 事件
      */
-    function drag(ev) {
+    function doDragStart(ev) {
         ev.dataTransfer.setData("text/plain", ev.target.id);
     }
 
     /**
      * 如果需要設置允許放置，我們必須阻止對元素的默認處理方式。
-     * 這要通過調用 ondragover 事件的event.preventDefault() 方法。
+     * 這要通過調用 ondragover 事件的 event.preventDefault() 方法。
      * @param ev 事件
      */
-    function allowDrop(ev) {
+    function doDragOver(ev) {
         ev.preventDefault();
     }
 
@@ -45,7 +43,7 @@
      * 進行放置。
      * @param ev 事件
      */
-    function drop(ev) {
+    function doDrop(ev) {
         // 調用 preventDefault() 來避免瀏覽器對數據的默認處理（drop 事件的默認行為是以鏈接形式打開）。
         ev.preventDefault();
 
@@ -56,6 +54,13 @@
         // 把被拖元素追加到放置元素（目標元素）中。
         ev.target.appendChild(document.getElementById(data));
     }
+
+    // 為了使元素可拖動，把 draggable 屬性設置為 true。ondragstart 屬性調用了一個函數。
+    document.querySelector("#drag1").addEventListener("dragstart", doDragStart);
+
+    // ondragover 事件規定在何處放置被拖動的數據。默認地，無法將數據/元素放置到其他元素中。當放置被拖數據時，會發生 drop 事件。
+    document.querySelector("#div1").addEventListener("dragover", doDragOver);
+    document.querySelector("#div1").addEventListener("drop", doDrop);
 </script>
 </body>
 </html>
