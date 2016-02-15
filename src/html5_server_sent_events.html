@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Server-Sent Events</title>
+</head>
+<body>
+<h1>Getting server updates</h1>
+<div id="result"></div>
+
+<script>
+    // 檢測 Server-Sent 事件支持。
+    if (typeof(EventSource) !== "undefined") {
+        // 創建一個新的 EventSource 對象，然後規定發送更新的頁面的 URL（本例中是 "demo_sse.php"）。把 "Content-Type" 報頭設置為 "text/event-stream"。
+        var source = new EventSource("http://www.w3schools.com/html/demo_sse.php");
+
+        // 每接收到一次更新，就會發生 onmessage 事件。
+        source.onmessage = function (event) {
+            // 當 onmessage 事件發生時，把已接收的數據推入 id 為 "result" 的元素中。
+            document.getElementById("result").innerHTML += event.data + "<br>";
+        };
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+    }
+</script>
+</body>
+</html>
