@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Local Storage</title>
+</head>
+<body>
+
+<div id="localStorageResult"></div>
+<div id="sessionStorageResult"></div>
+
+<button id="counter" type="button">Click me!</button>
+<button id="reset" type="button">重設</button>
+
+<script>
+    // 檢查瀏覽器是否支持 localStorage 和 sessionStorage。
+    if (typeof(Storage) !== "undefined") {
+        // 使用 key="lastname" 和 value="Smith" 創建一個 localStorage 鍵/值對。
+        localStorage.setItem("lastname", "Smith");
+        sessionStorage.setItem("lastname", "Smith");
+
+        // 檢索鍵值為 "lastname" 的值然後將數據插入id="localStorageResult" 的元素中。
+        document.getElementById("localStorageResult").innerHTML = localStorage.getItem("lastname");
+        document.getElementById("sessionStorageResult").innerHTML = sessionStorage.getItem("lastname");
+    } else {
+        document.getElementById("localStorageResult").innerHTML = "Sorry, your browser does not support Web Storage...";
+        document.getElementById("sessionStorageResult").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+
+    /**
+     * 鍵/值對通常以字符串存儲，你可以按自己的需要轉換該格式。
+     */
+    function clickCounter() {
+        /**
+         * 取得用戶點擊按鈕的次數。
+         * @param storage Web storage
+         * @returns {number|*} 用戶點擊按鈕的次數
+         */
+        function counter(storage) {
+            if (storage.clickcount) {
+                // 代碼中的字符串值轉換為數字類型。
+                storage.clickcount = Number(storage.clickcount) + 1;
+            } else {
+                storage.clickcount = 1;
+            }
+            return storage.clickcount;
+        }
+
+        if (typeof(Storage) !== "undefined") {
+            document.getElementById("localStorageResult").innerHTML = "You have clicked the button " + counter(localStorage) + " time(s).";
+            document.getElementById("sessionStorageResult").innerHTML = "You have clicked the button " + counter(sessionStorage) + " time(s).";
+        } else {
+            document.getElementById("localStorageResult").innerHTML = "Sorry, your browser does not support web storage...";
+            document.getElementById("sessionStorageResult").innerHTML = "Sorry, your browser does not support web storage...";
+        }
+    }
+
+    /**
+     * 重設。
+     */
+    function reset() {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.clear();
+            sessionStorage.clear();
+        } else {
+            document.getElementById("localStorageResult").innerHTML = "Sorry, your browser does not support Web Storage...";
+            document.getElementById("sessionStorageResult").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+    }
+
+    document.querySelector("#counter").addEventListener("click", clickCounter);
+    document.querySelector("#reset").addEventListener("click", reset);
+</script>
+
+</body>
+</html>
