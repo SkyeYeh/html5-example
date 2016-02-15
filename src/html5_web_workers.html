@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Web Workers</title>
+</head>
+<body>
+
+<p>Count numbers:
+    <output id="result"></output>
+</p>
+<button id="startWorker">Start Worker</button>
+<button id="stopWorker">Stop Worker</button>
+
+<p><strong>Note:</strong> Internet Explorer 9 and earlier versions do not support Web Workers.</p>
+
+<script>
+    var w;
+
+    /**
+     * 開始 Worker。
+     */
+    function startWorker() {
+        // 檢測 Web Worker 支持。
+        if (typeof(Worker) !== "undefined") {
+            // 檢測是否存在 worker，如果不存在，它會創建一個新的 web worker 對象，然後運行 "workers.js" 中的代碼：
+            if (typeof(w) == "undefined") {
+                w = new Worker("js/workers.js");
+            }
+
+            // 向 web worker 添加一個 "onmessage" 事件監聽器。
+            w.onmessage = function (event) {
+                document.getElementById("result").innerHTML = event.data;
+            };
+        } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+        }
+    }
+
+    /**
+     * 停止 Worker。
+     */
+    function stopWorker() {
+        // 終止 web worker，並釋放瀏覽器/計算機資源，請使用 terminate() 方法。
+        w.terminate();
+        w = undefined;
+    }
+
+    document.querySelector("#startWorker").addEventListener("click", startWorker);
+    document.querySelector("#stopWorker").addEventListener("click", stopWorker);
+</script>
+</body>
+</html>
