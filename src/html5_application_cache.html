@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+如需啟用應用程序緩存，請在文檔的 <html> 標籤中包含 manifest 屬性。
+manifest 文件的建議的文件擴展名是：".appcache"。
+manifest 文件需要配置正確的 MIME-type，即 "text/cache-manifest"。必須在 web 服務器上進行配置。
+-->
+<html lang="zh-Hant-TW" manifest="cache.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 Application Cache</title>
+</head>
+<body>
+<p id="timePara">
+    <button id="getDateTime">Get Date and Time</button>
+</p>
+
+<p><img src="img/cache.png" width="64" height="64"></p>
+
+<p>Try opening <a href="html5_application_cache.html" target="_blank">this page</a>, then go offline, and reload the
+    page. The script and the image should still work.</p>
+
+<script src="js/cache.js"></script>
+<script>
+    document.querySelector("#getDateTime").addEventListener("click", getDateTime);
+</script>
+
+</body>
+</html>
