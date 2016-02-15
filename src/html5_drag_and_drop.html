@@ -14,7 +14,6 @@
     </style>
 </head>
 <body>
-
 <p>Drag the W3Schools image into the rectangle:</p>
 
 <!--ondragover 事件規定在何處放置被拖動的數據。默認地，無法將數據/元素放置到其他元素中。當放置被拖數據時，會發生drop 事件。-->
@@ -30,7 +29,7 @@
      * @param ev 事件
      */
     function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
+        ev.dataTransfer.setData("text/plain", ev.target.id);
     }
 
     /**
@@ -52,7 +51,7 @@
 
         // 通過 dataTransfer.getData("Text") 方法獲得被拖的數據。該方法將返回在setData() 方法中設置為相同類型的任何數據。
         // 被拖數據是被拖元素的id ("drag1")。
-        var data = ev.dataTransfer.getData("text");
+        var data = ev.dataTransfer.getData("text/plain");
 
         // 把被拖元素追加到放置元素（目標元素）中。
         ev.target.appendChild(document.getElementById(data));
