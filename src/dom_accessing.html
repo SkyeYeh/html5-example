@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Accessing</title>
+</head>
+<body>
+
+<p id="demo"></p>
+<input type="button" id="getElementsByTagName" value="getElementsByTagName">
+<input type="button" id="nodeListLength" value="nodeListLength">
+
+<script>
+    var xmlHttp;
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+
+        }
+    };
+    xmlHttp.open("GET", "xml/books.xml", true);
+    xmlHttp.send();
+
+    /**
+     * getElementsByTagName() 返回擁有指定標籤名的所有元素。
+     */
+    function getElementsByTagName() {
+        var node = xmlHttp.responseXML;
+        document.getElementById("demo").innerHTML = node.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+    }
+
+    function nodeListLength(xml) {
+        var x, i, txt, xmlDoc;
+        xmlDoc = xml.responseXML;
+        txt = "";
+
+        // 獲取所有 <title> 元素節點。
+        x = xmlDoc.getElementsByTagName("title");
+        for (i = 0; i < x.length; i++) {
+            // 輸出每個 <title> 元素的文本節點的值。
+            txt += x[i].childNodes[0].nodeValue + "<br>";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+
+    document.querySelector("#getElementsByTagName").addEventListener("click", getElementsByTagName);
+    document.querySelector("#nodeListLength").addEventListener("click", function () {
+        nodeListLength(xmlHttp);
+    });
+</script>
+
+</body>
+</html>
