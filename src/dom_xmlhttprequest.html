@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM XMLHttpRequest</title>
+</head>
+<body>
+
+<h2>Using the XMLHttpRequest object</h2>
+
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+
+<p id="demo"></p>
+
+<script>
+    /**
+     * 載入 XML 文件。出於安全原因，現代的瀏覽器不允許跨域訪問。
+     */
+    function loadXMLDoc() {
+        // 創建一個 XMLHttpRequest 物件。
+        var xmlHttp = new XMLHttpRequest();
+
+        // 設置 XMLHttpRequest 物件回應。
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                document.getElementById("demo").innerHTML =
+                    xmlHttp.responseText;
+            }
+        };
+
+        // 打開 XMLHttpRequest 物件。
+        xmlHttp.open("GET", "xml/books.xml", true);
+
+        // 發送一個 XMLHttpRequest 請求到伺服器。
+        xmlHttp.send();
+    }
+</script>
+
+</body>
+</html>
